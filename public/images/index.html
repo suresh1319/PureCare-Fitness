@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>PureCare Gym</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: url(bgimg.jpg);
+            background-position: center;
+            background-size: cover;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        header {
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Center the content horizontally */
+            position: relative; /* Allows positioning of the hamburger menu */
+        }
+
+        .logo {
+            height: 160px; /* Adjusted height for the logo */
+            margin-right: 10px; /* Space between the logo and location icon */
+        }
+
+        .location-icon {
+            color: white; /* Ensure the icon is white */
+            margin-right: 20px; /* Space between the location icon and the nav menu */
+            font-size: 24px;
+        }
+        .location{
+            background-color: black;
+        }
+        select {
+    background-color: transparent; /* Makes the background transparent */
+    border: none; /* Removes the border */
+    color: white; /* Adjusts the text color to be visible */
+    font-size: inherit; /* Inherits font size from the parent */
+    padding: 5px; /* Adds some padding for aesthetics */
+}
+select option {
+    color: black; /* Sets the text color of options to black */
+}
+
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            position: absolute;
+            right: 20px; /* Hamburger positioned on the right */
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            font-weight: 200;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            font-size: 18px;
+            font-weight: 200px;
+            color: red;
+        }
+
+        nav ul li .btn {
+            background-color: #C0EBA6;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        nav ul li .btn:hover {
+            background-color: #fff;
+            color: #333;
+            font-size: 18px;
+        }
+
+        main div {
+            color: whitesmoke;
+            height: 800px;
+            font-size: 22px;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        section {
+            text-align: center;
+        }
+
+        section a {
+            background-color: #C0EBA6;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        section div a:hover {
+            background-color: #fff;
+            color: #333;
+            font-size: 18px;
+        }
+
+        footer {
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                background-color: #333;
+                position: absolute;
+                top: 60px;
+                right: 10px;
+                width: fit-content;
+                padding: 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+                text-align: left;
+                padding-left: 20px;
+            }
+
+            nav ul li a, nav ul li .btn {
+                width: auto;
+                padding: 10px;
+                display: block;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1rem 0.5rem;
+            }
+
+            nav ul li {
+                margin-left: 0;
+                padding-left: 15px;
+            }
+
+            nav ul li a, nav ul li .btn {
+                font-size: 16px;
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="fitnesslogo.png" alt="PureCare Logo" class="logo" height="200px"/>
+        
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <nav id="nav-menu">
+            <ul>
+                <li>
+                    <i class="fa-duotone fa-solid fa-location-dot"></i><select id="location" name="Location">
+                        <option value="1">Hyderabad</option>
+                        <option value="1">Warangal</option>
+                        <option value="1">Khammam</option>
+                        <option value="1">Karimnagar</option>
+                        <option value="1">Nizamabad</option>
+                    </select>
+                </li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="http://127.0.0.1:5500/knowmore.html">About</a></li>
+                <li><a href="http://127.0.0.1:5500/service.html#">Services</a></li>
+                <li><a href="http://127.0.0.1:5500/trainers.html">Trainers</a></li>
+                <li><a href="http://127.0.0.1:5500/cont.html">Contact Us</a></li>
+                <li><a href="http://127.0.0.1:5500/peter.html" class="btn">Register</a></li>
+                <li><a href="http://127.0.0.1:5500/peter.html" class="btn">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div>
+            <img src="maindiv.png" alt="" height="400">
+        </div>
+    </main>
+    <section>
+        <a href="http://127.0.0.1:5500/knowmore.html" class="btn">Know More</a>
+        <a href="chat.html" class="btn">Chat with Our Bot</a>
+        <a href="reviews.html" class="btn">Reviews</a>
+    </section>
+    <footer>
+        <p>&copy; 2024 purecarepath</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+
+            hamburger.addEventListener('click', function () {
+                navMenu.querySelector('ul').classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyms Nearby</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: black;
+            text-align: center;
+            background-image: url('servicebg.webp');
+            background-position: center;
+            background-size: cover;
+        }
+        h1 {
+            margin-bottom: 40px;
+            color: white;
+        }
+        .home-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: rgba(255, 215, 0, 0.8); /* Gold background for home link */
+            color: black;
+            font-weight: bold;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .home-link:hover {
+            background-color: rgba(255, 215, 0, 1); /* Darken on hover */
+        }
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Space between cards */
+            flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+            margin-bottom: 40px; /* Space below gym section */
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px; /* Fixed width for cards */
+            transition: transform 0.2s;
+            text-align: left; /* Align text to the left */
+            padding: 15px; /* Add padding inside cards */
+        }
+        .card:hover {
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px; /* Rounded corners for images */
+        }
+        .card h2 {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        .location, .contact, .price {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .price {
+            color: #000; /* Price in black for emphasis */
+            font-weight: bold; /* Bold price */
+        }
+        .learn-more {
+            background-color: #007bff; /* Button color */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .learn-more:hover {
+            background-color: #0056b3; /* Darken on hover */
+        }
+        .trainers-section {
+            margin-top: 60px; /* Space above trainers section */
+        }
+    </style>
+</head>
+<body>
+
+<a href="index.html" class="home-link">Home</a>
+<a href="service.html" class="home-link">Back</a> <!-- Link to Home -->
+
+<h1>Gyms Nearby</h1>
+<div class="card-container">
+    <div class="card">
+        <img src="gym1.jpg" alt="Gym 1">
+        <h2>Fit Club</h2>
+        <p class="location">Kompally, Hyderabad</p>
+        <p class="contact">Contact: +91 12345 67890</p>
+        <p class="price">Monthly Price: ₹6,000</p>
+    </div>
+    <div class="card">
+        <img src="gym2.jpg" alt="Gym 2">
+        <h2>Strength Haven</h2>
+        <p class="location">Bahadurpally, Hyderabad</p>
+        <p class="contact">Contact: +91 09876 54321</p>
+        <p class="price">Monthly Price: ₹5,500</p>
+    </div>
+    <div class="card">
+        <img src="gym3.jpg" alt="Gym 3">
+        <h2>Health Hub</h2>
+        <p class="location">Suraram, Hyderabad</p>
+        <p class="contact">Contact: +91 11223 44556</p>
+        <p class="price">Monthly Price: ₹7,000</p>
+    </div>
+    <div class="card">
+        <img src="gym4.jpg" alt="Gym 4">
+        <h2>Fitness Hub</h2>
+        <p class="location">Maisammaguda, Hyderabad</p>
+        <p class="contact">Contact: +91 22334 55667</p>
+        <p class="price">Monthly Price: ₹5,000</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<header class="navbar">
+    <div class="nav-container">
+        <img src="/images/fitnesslogo.png" alt="PureCare Logo" class="logo" height="60px"/>
+        
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <nav id="nav-menu">
+            <ul>
+                <li class="location-selector">
+                    <i class="fas fa-location-dot"></i>
+                    <span id="location" style="color: white;">Loading location...</span>
+                </li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/trainers">Trainers</a></li>
+                <li><a href="/contact"  >Contact Us</a></li>
+                <% if (currentPath === '/') { %>
+                    <li><a href="/register" class="btn">Register</a></li>
+                    <li><a href="/login" class="btn">Login</a></li>
+                <% } %>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<style>
+
+    .navbar {
+        position: relative;
+        width: 100%;
+        z-index: 1000;
+        padding: 1rem 0;
+        background: transparent;
+        box-shadow: none;
+        height: auto;
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar.black-bg {
+        background: rgba(0, 0, 0, 0.9);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-container {
+        max-width: 1400px;
+        width: 95%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+    }
+
+    .logo {
+        height: 60px;
+        width: auto;
+        transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+        transform: scale(1.05);
+    }
+
+    .hamburger {
+        display: none;
+        cursor: pointer;
+    }
+
+    .hamburger div {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        margin: 5px 0;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        white-space: nowrap;
+        gap: 10px;
+    }
+
+    nav ul li {
+        margin: 0 10px;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+        white-space: nowrap;
+    }
+
+    nav ul li a:hover {
+        color: #bce3d7;
+    }
+
+    .btn {
+        background: #bce3d7;
+        color: #000;
+        padding: 6px 16px;
+        border-radius: 20px;
+        transition: all 0.3s;
+        white-space: nowrap;
+    }
+
+    .btn:hover {
+        background: #9fd1c2;
+        color: #000;
+    }
+
+    @media (max-width: 1024px) {
+        .nav-container {
+            max-width: 100%;
+            padding: 0 1rem;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .hamburger {
+            display: block;
+        }
+
+        nav {
+            display: none;
+        }
+
+        nav.active {
+            display: block;
+        }
+
+        nav ul {
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        nav ul li {
+            margin: 10px 0;
+        }
+
+        .logo {
+            height: 50px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        const locationDisplay = document.getElementById('location');
+        const navbar = document.querySelector('.navbar');
+
+        // Add black background to navbar on all pages except home
+        if (window.location.pathname !== '/') {
+            navbar.classList.add('black-bg');
+        }
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Location detection logic
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    // You can use a reverse geocoding service here to get the location name
+                    locationDisplay.textContent = `Location: ${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
+                },
+                (error) => {
+                    locationDisplay.textContent = 'Location unavailable';
+                }
+            );
+        } else {
+            locationDisplay.textContent = 'Geolocation not supported';
+        }
+    });
+</script> 

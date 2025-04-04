@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .home-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: rgba(255, 215, 0, 0.8); /* Gold background for home link */
+            color: black;
+            font-weight: bold;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .home-link:hover {
+            background-color: rgba(255, 215, 0, 1); /* Darken on hover */
+        }
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px; /* Fixed width for cards */
+            transition: transform 0.2s;
+            padding: 20px;
+            text-align: left; /* Align text to the left */
+        }
+        .card:hover {
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px; /* Rounded corners for images */
+        }
+        .card h2 {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        .card p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .card a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .card a:hover {
+            background-color: #0056b3; /* Darken on hover */
+        }
+    </style>
+</head>
+<body>
+
+<a href="index.html" class="home-link">Home</a> <!-- Home link -->
+
+<h1>Welcome to Our Gym</h1>
+<div class="card-container">
+    <div class="card">
+        <img src="gym1.jpg" alt="About Our Gyms">
+        <h2>About Our Gyms</h2>
+        <p>Our gyms are equipped with the latest fitness equipment and a range of classes to suit all fitness levels.</p>
+        <a href="http://127.0.0.1:5500/gyms.html">Learn More</a>
+    </div>
+    <div class="card">
+        <img src="person1.jpg" alt="Trainers">
+        <h2>Trainers</h2>
+        <p>Our certified trainers are dedicated to helping you achieve your fitness goals with personalized training programs.</p>
+        <a href="http://127.0.0.1:5500/trainers.html">Meet Our Trainers</a>
+    </div>
+    <div class="card">
+        <img src="supplementary1.jpg" alt="Supplementaries">
+        <h2>Supplementaries</h2>
+        <p>We offer a wide range of supplements to enhance your workout and recovery. Discover our selection today!</p>
+        <a href="supplementaries.html">Shop Supplements</a>
+    </div>
+</div>
+</body>
+</html>

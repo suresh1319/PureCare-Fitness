@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Trainer Profiles</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0;
+        background-color: rgb(177, 174, 174); }
+
+        /* Navigation bar */
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #333;
+            padding: 14px 0;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            background-color:#C0EBA6;
+            height: 30px;
+            width: 70px;
+            border-radius: 5px;
+            color: black;
+
+        }
+
+        /* Container and card layout */
+        .container { display: flex; flex-wrap: wrap; justify-content: space-around; padding: 20px; }
+        .profile {
+            position: relative;
+            width: 30%;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        .profile img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .btn{
+            text-align: center;
+        }
+
+        /* Info overlay on the photo */
+        .info-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .info-overlay h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .info-overlay p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        /* See more section */
+        .more-info {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        /* Buttons */
+        button {
+            cursor: pointer;
+            padding: 10px 15px;
+            margin: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: calc(100% - 20px);
+        }
+        .contact-btn {
+            background-color: #28a745;
+        }
+
+        /* Registration form styles */
+        .registration-form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .registration-form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .registration-form input[type="text"], .registration-form select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar with centered Home link -->
+    <div class="navbar">
+        <div class="btn">
+        <a href="http://127.0.0.1:5500/index.html"><i class="fa-solid fa-house"></i> Home</a></div>
+       <div class="btn"><a href="service.html">Back</a></div>
+    </div>
+
+    <h1 style="text-align: center; margin-top: 20px;">Gym Trainer Profiles</h1>
+    <div class="container" id="trainerProfiles"></div>
+
+
+    <script>
+        const trainers = [
+            { name: "John Doe", experience: 5, age: 30, height: "5'9\"", weight: "180 lbs", img: "person1.jpg", price: "$300/month", language: "English" },
+            { name: "Jane Smith", experience: 7, age: 28, height: "5'5\"", weight: "140 lbs", img: "person3.jpg", price: "$350/month", language: "Spanish" },
+            { name: "Mike Johnson", experience: 3, age: 35, height: "6'0\"", weight: "200 lbs", img: "p2.jpg", price: "$280/month", language: "English" },
+            { name: "Emily Davis", experience: 4, age: 26, height: "5'6\"", weight: "135 lbs", img: "person2.jpg", price: "$320/month", language: "French" },
+            { name: "Chris Lee", experience: 6, age: 40, height: "5'11\"", weight: "190 lbs", img: "p1.avif", price: "$330/month", language: "Mandarin" },
+            { name: "Sarah Brown", experience: 2, age: 22, height: "5'4\"", weight: "130 lbs", img: "person5.jpg", price: "$290/month", language: "German" },
+            { name: "David Wilson", experience: 8, age: 32, height: "6'1\"", weight: "210 lbs", img: "p3.jpg", price: "$400/month", language: "English" },
+            { name: "Laura Green", experience: 10, age: 29, height: "5'7\"", weight: "145 lbs", img: "person6.jpg", price: "$380/month", language: "Spanish" },
+            { name: "James Taylor", experience: 1, age: 24, height: "5'8\"", weight: "160 lbs", img: "person4.jpg", price: "$260/month", language: "English" },
+            { name: "Megan White", experience: 9, age: 34, height: "5'3\"", weight: "125 lbs", img: "p4.jpg", price: "$360/month", language: "French" }
+        ];
+
+        trainers.forEach((trainer, index) => {
+            const profileDiv = document.createElement('div');
+            profileDiv.className = 'profile';
+
+            profileDiv.innerHTML = `
+                <img src="${trainer.img}" alt="${trainer.name}"/>
+                <div class="info-overlay">
+                    <h2>${trainer.name}</h2>
+                    <p>Experience: ${trainer.experience} years</p>
+                    <p>Language: ${trainer.language}</p>
+                    <button onclick="toggleMoreInfo(${index})">See More</button>
+                </div>
+                <div class="more-info" id="moreInfo${index}">
+                    <p>Height: ${trainer.height}</p>
+                    <p>Weight: ${trainer.weight}</p>
+                    <p>Price: ${trainer.price}</p>
+                </div>
+                <button class="contact-btn">Contact Us</button>
+            `;
+            document.getElementById('trainerProfiles').appendChild(profileDiv);
+        });
+
+        function toggleMoreInfo(index) {
+            const moreInfoDiv = document.getElementById(`moreInfo${index}`);
+            moreInfoDiv.style.display = moreInfoDiv.style.display === 'none' || moreInfoDiv.style.display === '' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>

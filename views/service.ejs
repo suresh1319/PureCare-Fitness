@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.2s;
+            padding: 20px;
+            text-align: left;
+            margin-top: 60px;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .card h2 {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        .card p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .card a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .card a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="card">
+            <img src="/images/gym1.jpg" alt="About Our Gyms" height="200">
+            <h2>About Our Gyms</h2>
+            <p>Our gyms are equipped with the latest fitness equipment and a range of classes to suit all fitness levels.</p>
+            <a href="/gyms">Learn More</a>
+        </div>
+        <div class="card">
+            <img src="/images/person1.jpg" alt="Trainers">
+            <h2>Trainers</h2>
+            <p>Our certified trainers are dedicated to helping you achieve your fitness goals with personalized training programs.</p>
+            <a href="/trainers">Meet Our Trainers</a>
+        </div>
+        <div class="card">
+            <img src="/images/supplementary1.jpg" alt="Supplementaries">
+            <h2>Supplementaries</h2>
+            <p>We offer a wide range of supplements to enhance your workout and recovery. Discover our selection today!</p>
+            <a href="/supplementaries">Shop Supplements</a>
+        </div>
+    </div>
+</body>
+</html>

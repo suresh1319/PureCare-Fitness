@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PureCare Gym - Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/bgimg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            padding: 80px 20px 20px;
+            margin: 0;
+        }
+
+        .register-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: auto;
+            flex: 1;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo p {
+            color: #bce3d7;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #bce3d7;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #bce3d7;
+            box-shadow: 0 0 10px rgba(188, 227, 215, 0.3);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: #bce3d7;
+            border: none;
+            border-radius: 30px;
+            color: #000;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: #9fd1c2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .links a {
+            color: #bce3d7;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .links a:hover {
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .user-type {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .user-type-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+        }
+
+        .user-type-btn.active {
+            background: #bce3d7;
+            color: #000;
+        }
+
+        .user-type-btn:hover {
+            background: rgba(188, 227, 215, 0.3);
+        }
+
+        .trainer-fields {
+            display: none;
+        }
+
+        .trainer-fields.show {
+            display: block;
+        }
+
+        .trainer-application {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .trainer-application.show {
+            display: block;
+        }
+
+        .trainer-application h3 {
+            color: #bce3d7;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .file-upload {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-label:hover {
+            background: rgba(188, 227, 215, 0.1);
+            border-color: #bce3d7;
+        }
+
+        .file-upload-label i {
+            margin-right: 10px;
+            color: #bce3d7;
+        }
+
+        .file-name {
+            margin-left: 10px;
+            color: #bce3d7;
+            font-size: 0.9rem;
+        }
+
+        .textarea-group {
+            margin-bottom: 20px;
+        }
+
+        .textarea-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            color: #fff;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .textarea-group textarea:focus {
+            outline: none;
+            border-color: #bce3d7;
+            box-shadow: 0 0 10px rgba(188, 227, 215, 0.3);
+        }
+
+        .apply-trainer-btn {
+            background: rgba(188, 227, 215, 0.2);
+            color: #bce3d7;
+            border: 1px solid #bce3d7;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .apply-trainer-btn:hover {
+            background: #bce3d7;
+            color: #000;
+        }
+
+        .trainer-application-fields {
+            display: none;
+        }
+
+        .trainer-application-fields.show {
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .register-container {
+                padding: 30px 20px;
+            }
+
+            .logo h1 {
+                font-size: 2rem;
+            }
+
+            .user-type {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="logo">
+            <h1>PureCare Gym</h1>
+            <p>Join Our Fitness Community</p>
+        </div>
+
+        <form action="/register" method="POST" id="registrationForm">
+            <div class="form-group">
+                <i class="fas fa-user"></i>
+                <input type="text" class="form-control" placeholder="Full Name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" class="form-control" placeholder="Email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" class="form-control" placeholder="Password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" class="form-control" placeholder="Confirm Password" name="confirmPassword" required>
+            </div>
+
+            <div class="form-group">
+                <i class="fas fa-phone"></i>
+                <input type="tel" class="form-control" placeholder="Phone Number" name="phone" required>
+            </div>
+
+            <button type="button" class="apply-trainer-btn" id="applyTrainerBtn">
+                <i class="fas fa-dumbbell"></i> Apply as Trainer
+            </button>
+
+            <div class="trainer-application" id="trainerApplication">
+                <h3>Trainer Application</h3>
+                
+                <div class="form-group">
+                    <i class="fas fa-certificate"></i>
+                    <input type="text" class="form-control" placeholder="Certifications (comma separated)" name="certifications" required>
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-briefcase"></i>
+                    <input type="number" class="form-control" placeholder="Years of Experience" name="experience" required>
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-tags"></i>
+                    <input type="text" class="form-control" placeholder="Specialization" name="specialization" required>
+                </div>
+
+                <div class="textarea-group">
+                    <textarea class="form-control" placeholder="Professional Summary" name="summary" required></textarea>
+                </div>
+
+                <div class="textarea-group">
+                    <textarea class="form-control" placeholder="Previous Work Experience" name="workExperience" required></textarea>
+                </div>
+
+                <div class="file-upload">
+                    <label class="file-upload-label">
+                        <i class="fas fa-file-upload"></i>
+                        <span>Upload Resume (PDF)</span>
+                        <input type="file" name="resume" accept=".pdf" required>
+                        <span class="file-name"></span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" class="form-control" placeholder="Current Address" name="address" required>
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-calendar"></i>
+                    <input type="date" class="form-control" placeholder="Date of Birth" name="dob" required>
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-venus-mars"></i>
+                    <select class="form-control" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">
+                <i class="fas fa-user-plus"></i> Register
+            </button>
+        </form>
+
+        <div class="links">
+            <a href="/login">Already have an account? Login</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const trainerApplication = document.getElementById('trainerApplication');
+            const form = document.getElementById('registrationForm');
+            const fileInput = document.querySelector('input[type="file"]');
+            const fileName = document.querySelector('.file-name');
+            const applyTrainerBtn = document.getElementById('applyTrainerBtn');
+            const traineeForm = document.querySelectorAll('.form-group:not(.trainer-application .form-group)');
+            const submitBtn = document.querySelector('button[type="submit"]');
+
+            applyTrainerBtn.addEventListener('click', function() {
+                const isShowingTrainer = trainerApplication.classList.toggle('show');
+                
+                // Toggle trainee form visibility
+                traineeForm.forEach(element => {
+                    element.style.display = isShowingTrainer ? 'none' : 'block';
+                });
+                
+                // Toggle submit button visibility
+                submitBtn.style.display = isShowingTrainer ? 'none' : 'block';
+                
+                // Update button text
+                this.innerHTML = isShowingTrainer ? 
+                    '<i class="fas fa-times"></i> Cancel Application' : 
+                    '<i class="fas fa-dumbbell"></i> Apply as Trainer';
+            });
+
+            fileInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    fileName.textContent = this.files[0].name;
+                } else {
+                    fileName.textContent = '';
+                }
+            });
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = this.querySelector('button[type="submit"]');
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registering...';
+                
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData.entries());
+                
+                if (data.password !== data.confirmPassword) {
+                    alert('Passwords do not match!');
+                    submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Register';
+                    return;
+                }
+
+                // Add user type to form data
+                formData.append('userType', trainerApplication.classList.contains('show') ? 'trainer' : 'trainee');
+
+                // Simulate registration process
+                setTimeout(() => {
+                    console.log('Registration attempt:', data);
+                    window.location.href = '/';
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>

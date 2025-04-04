@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Chatbot</title>
+    <style>  
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url(botbg.jpg);
+            background-position: center;
+            background-size: cover;
+        }
+        .chat-container {
+            background-color: rgba(180, 179, 177,0.6);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            width: 400px;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .header {
+            background-color: aqua;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        .header a {
+            color: black;
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .chat-box {
+            padding: 20px;
+            height: 300px;
+            overflow-y: auto;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .bot-message {
+            background-color: #e1f5fe;
+            text-align: left;
+        }
+        .user-message {
+            background-color: #ffecb3;
+            text-align: right;
+        }
+        input[type="text"] {
+            width: calc(100% - 80px);
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+        button {
+            padding: 10px;
+            border: none;
+            background-color: aqua;
+            color: black;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header">
+            <a href="index.html">Home</a>
+        </div>
+        <div class="chat-box" id="chat-box">
+            <div class="message bot-message">Hello! I'm your fitness assistant. How can I help you today?</div>
+        </div>
+        <input type="text" id="user-input" placeholder="Type your message..." />
+        <button id="send-button">Send</button>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+
+        const responses = {
+            "hi": "Hello! How can I assist you with your fitness journey today?",
+            "what is the best diet": "A balanced diet includes proteins, carbs, and healthy fats. It's best to consult a nutritionist for personalized advice.",
+            "how to lose weight": "Incorporate strength training and cardio into your routine, and maintain a calorie deficit.",
+            "how to gain muscle": "Focus on strength training, eat enough protein, and ensure you're in a caloric surplus.",
+            "i want a workout plan": "Please provide your age, weight, height, and fitness goals.",
+            "thank you": "You're welcome! If you have more questions, just ask.",
+            "i want to start my fitness journey": "That's great to hear! Start by setting clear, achievable goals. Would you like a personalized plan based on your details?",
+            "what should i do to get fit": "Getting fit involves a combination of regular exercise, a balanced diet, and adequate rest. Do you have any specific goals?",
+            "how to stay motivated": "Staying motivated can be challenging. Set small milestones, track your progress, and find a workout buddy or community for support.",
+            "how often should I work out": "Aim for at least 3-5 times a week, incorporating both cardio and strength training for balanced fitness.",
+            "what are the benefits of strength training": "Strength training can help increase muscle mass, boost metabolism, improve bone density, and enhance overall functional fitness.",
+            "can I lose weight without exercise": "Yes, weight loss can occur through dietary changes alone, but combining it with exercise is more effective and healthier.",
+            "how do I stay consistent with my workouts": "Create a schedule, find activities you enjoy, and track your progress to help maintain consistency.",
+            "what are good snacks for weight loss": "Healthy snacks include fruits, nuts, yogurt, and veggie sticks with hummus.",
+            "is cardio or strength training better for weight loss": "Both are important. Cardio burns calories, while strength training builds muscle, which helps maintain a higher metabolism.",
+            "how can I build a home gym": "Start with essential equipment like dumbbells, resistance bands, a yoga mat, and bodyweight exercises. You can expand as needed.",
+            "what should I eat before a workout": "A light snack with carbs and protein, such as a banana with peanut butter, can provide energy without weighing you down.",
+            "what should I eat after a workout": "Aim for a combination of protein and carbs, like a protein shake with a piece of fruit or grilled chicken with quinoa.",
+            "how do I improve my flexibility": "Incorporate regular stretching routines, yoga, or Pilates into your fitness regimen.",
+            "what is the best time to work out": "The best time is when you can consistently fit it into your schedule.",
+            "should I lift weights every day": "It's not necessary to lift weights every day. Aim for 3-4 days a week, allowing muscles time to recover.",
+            "how can I tone my arms": "Incorporate exercises like push-ups, tricep dips, and bicep curls into your routine.",
+            "what are the signs of overtraining": "Signs include fatigue, decreased performance, insomnia, and increased injuries.",
+            "how can I track my progress": "Keep a workout log, take progress photos, and track your weight or measurements over time.",
+            "what is HIIT": "High-Intensity Interval Training (HIIT) alternates between short bursts of intense exercise and brief recovery periods.",
+            "how to improve endurance": "Increase your cardio workouts gradually, incorporate interval training, and ensure adequate nutrition and rest.",
+            "what is a calorie deficit": "A calorie deficit occurs when you consume fewer calories than your body burns.",
+            "what are superfoods": "Superfoods are nutrient-dense foods considered beneficial for health and well-being, such as berries, nuts, and leafy greens.",
+            "can I eat carbs and still lose weight": "Yes, focus on complex carbs like whole grains and vegetables.",
+            "how do I boost my metabolism": "Increase muscle mass through strength training, stay active throughout the day, and eat small, frequent meals.",
+            "what is the role of protein in fitness": "Protein is essential for muscle repair, recovery, and growth.",
+            "should I take supplements": "Supplements can be helpful, but it's best to focus on getting nutrients from whole foods first.",
+            "how can I prevent injuries while working out": "Use proper form, warm up and cool down, and listen to your body.",
+            "what are the best exercises for beginners": "Start with bodyweight exercises like squats, push-ups, lunges, and basic cardio activities like walking or cycling.",
+            "how important is rest and recovery": "Rest is crucial for muscle recovery and growth.",
+            "what is a fitness plateau": "A plateau is when you stop seeing progress in your fitness goals.",
+            "how can I reduce belly fat": "Combine a healthy diet with regular exercise. Focus on overall fat loss.",
+            "what is body composition": "Body composition refers to the ratio of fat, muscle, and other tissues in your body.",
+            "how do I choose the right gym": "Consider location, equipment, classes offered, and the overall atmosphere.",
+            "what are compound exercises": "Compound exercises involve multiple joints and muscle groups, such as squats and deadlifts.",
+            "how to maintain a healthy lifestyle": "Focus on balanced nutrition, regular exercise, adequate sleep, and managing stress.",
+            "what are the best cardio workouts": "Running, cycling, swimming, and HIIT are excellent for cardiovascular fitness.",
+            "how to incorporate more movement into my day": "Take breaks to stand or walk, use stairs instead of elevators.",
+            "what is the difference between weight loss and fat loss": "Weight loss refers to a decrease in overall body weight, while fat loss specifically targets body fat percentage.",
+            "how can I improve my mental health through fitness": "Regular exercise can reduce anxiety and depression, improve mood.",
+            "what are some tips for meal prep": "Plan your meals, batch cook, store in individual portions, and include a variety of healthy ingredients.",
+            "should I eat before or after a workout": "It depends on your preference and timing.",
+            "what is the best way to stay hydrated": "Drink plenty of water throughout the day and during workouts.",
+            "how can I make working out more fun": "Try different activities, join classes, or work out with friends.",
+            "what is a fitness tracker": "A fitness tracker is a device that monitors your physical activity and heart rate.",
+            "what are the benefits of group fitness classes": "Group classes offer motivation, camaraderie, and structured workouts.",
+            "how do I set realistic fitness goals": "Use the SMART criteria: Specific, Measurable, Achievable, Relevant, and Time-bound.",
+            "how can I overcome gym intimidation": "Start with a friend, take beginner classes.",
+            "what is the importance of stretching": "Stretching improves flexibility and reduces muscle tension.",
+            "how to find a workout buddy": "Ask friends or family, join local fitness groups.",
+            "what are the best exercises for abs": "Planks, crunches, and leg raises are effective for targeting abdominal muscles.",
+            "how do I improve my running speed": "Incorporate interval training, increase your mileage gradually, and focus on form.",
+            "what is the best way to warm up before a workout": "Dynamic stretches and light cardio can effectively prepare your muscles for exercise.",
+            "how to cool down after a workout": "Gentle stretching and low-intensity movements help your body transition back to rest.",
+            "what is plyometric training": "Plyometric training involves explosive movements to improve power and speed, like jump squats and box jumps.",
+            "how can I balance cardio and strength training": "Aim for 2-3 days of strength training and 2-3 days of cardio each week, depending on your goals.",
+            "what are the benefits of yoga": "Yoga improves flexibility, strength, and mental focus, and helps reduce stress.",
+            "how can I stay active during the day": "Take short breaks to walk, use a standing desk, or take the stairs instead of the elevator."
+        };
+
+        sendButton.addEventListener('click', function() {
+            const userMessage = userInput.value.toLowerCase();
+            if (userMessage) {
+                const userDiv = document.createElement('div');
+                userDiv.className = 'message user-message';
+                userDiv.textContent = userMessage;
+                chatBox.appendChild(userDiv);
+
+                const botResponse = responses[userMessage] || "I'm sorry, I didn't understand that. Can you ask something else?";
+                const botDiv = document.createElement('div');
+                botDiv.className = 'message bot-message';
+                botDiv.textContent = botResponse;
+                chatBox.appendChild(botDiv);
+
+                userInput.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        });
+
+        userInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendButton.click();
+            }
+        });
+    </script>
+</body>
+</html>

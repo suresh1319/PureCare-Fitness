@@ -1,0 +1,141 @@
+/* Navbar Styles */
+.navbar {
+    background-color: transparent;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    height: 160px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.navbar .logo:hover {
+    transform: scale(1.05);
+}
+
+.navbar .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    position: absolute;
+    right: 20px;
+}
+
+.navbar .hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+}
+
+.navbar nav ul {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 1.5rem;
+}
+
+.navbar nav ul li {
+    margin-left: 20px;
+}
+
+.navbar nav ul li a {
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+.navbar nav ul li a:hover {
+    color: #C0EBA6;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.navbar nav ul li .btn {
+    background-color: #C0EBA6;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.navbar nav ul li .btn:hover {
+    background-color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Location Selector Styles */
+.location-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.location-selector i {
+    color: white;
+    font-size: 24px;
+}
+
+.location-selector select {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: inherit;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.location-selector select option {
+    color: black;
+    background-color: white;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .navbar nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .navbar nav ul.active {
+        display: flex;
+    }
+
+    .navbar nav ul li {
+        margin: 0.5rem 0;
+        text-align: center;
+    }
+
+    .navbar .hamburger {
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .navbar .logo {
+        height: 120px;
+    }
+} 

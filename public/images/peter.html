@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Gym Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-image: url(bgimg.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            color: black;
+        }
+
+        header {
+            width: 100%;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px;
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 18px;
+            color: black;
+            background-color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        .form-container {
+            display: none;
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 20px;
+            background: #fff;
+            padding: 20px;
+            color: black;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: calc(100% - 40px);
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="http://127.0.0.1:5500/index.html"><i class="fa fa-home" style="color: #bce3d7;"></i> Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="button-container" id="button-container">
+            <button class="button" onclick="showForm('trainer')">Trainer Registration</button>
+            <button class="button" onclick="showForm('trainee')">Trainee Registration</button>
+            <button class="button" onclick="showForm('login')">Login</button>
+        </div>
+
+        <div id="trainer-registration" class="form-container">
+            <h2>Trainer Registration</h2>
+            <button class="button" onclick="showMain()">Back</button>
+            <form onsubmit="submitForm(event, 'Trainer')">
+                <label for="trainerFirstName">First Name:</label>
+                <input type="text" id="trainerFirstName" required>
+                <label for="trainerLastName">Last Name:</label>
+                <input type="text" id="trainerLastName" required>
+                <label for="trainerEmail">Email:</label>
+                <input type="email" id="trainerEmail" required>
+                <label for="trainerDOB">Date of Birth:</label>
+                <input type="date" id="trainerDOB" required>
+                <label for="trainerExperience">Experience (Years):</label>
+                <input type="number" id="trainerExperience" min="0" required>
+                <label for="trainerCert1">Certification 1:</label>
+                <input type="text" id="trainerCert1">
+                <label for="trainerCert2">Certification 2:</label>
+                <input type="text" id="trainerCert2">
+                <label for="trainerSpecialization">Specialization:</label>
+                <input type="text" id="trainerSpecialization">
+                <label for="trainerPhone">Phone Number:</label>
+                <input type="tel" id="trainerPhone" required>
+                <label for="trainerAddress">Address:</label>
+                <textarea id="trainerAddress" rows="3" required></textarea>
+                <button type="submit" class="button">Submit</button>
+            </form>
+        </div>
+
+        <div id="trainee-registration" class="form-container">
+            <h2>Trainee Registration</h2>
+            <button class="button" onclick="showMain()">Back</button>
+            <form onsubmit="submitForm(event, 'Trainee')">
+                <label for="traineeFirstName">First Name:</label>
+                <input type="text" id="traineeFirstName" required>
+                <label for="traineeLastName">Last Name:</label>
+                <input type="text" id="traineeLastName" required>
+                <label for="traineeEmail">Email:</label>
+                <input type="email" id="traineeEmail" required>
+                <label for="traineeDOB">Date of Birth:</label>
+                <input type="date" id="traineeDOB" required>
+                <label for="traineeGoals">Fitness Goals:</label>
+                <textarea id="traineeGoals" rows="4" required></textarea>
+                <label for="traineeEquipment">Do you have equipment?</label>
+                <select id="traineeEquipment">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+                <label for="traineeLanguage">Preferred Language:</label>
+                <select id="traineeLanguage" required>
+                    <option value="">Select Language</option>
+                    <option value="hindi">Hindi</option>
+                    <option value="bengali">Bengali</option>
+                    <option value="telugu">Telugu</option>
+                    <option value="marathi">Marathi</option>
+                    <option value="tamil">Tamil</option>
+                    <option value="urdu">Urdu</option>
+                    <option value="gujarati">Gujarati</option>
+                    <option value="malayalam">Malayalam</option>
+                    <option value="kannada">Kannada</option>
+                    <option value="punjabi">Punjabi</option>
+                    <option value="assamese">Assamese</option>
+                    <option value="odia">Odia</option>
+                    <option value="maithili">Maithili</option>
+                    <option value="manipuri">Manipuri</option>
+                    <option value="sanskrit">Sanskrit</option>
+                    <option value="dogri">Dogri</option>
+                </select>
+                <button type="submit" class="button">Submit</button>
+            </form>
+        </div>
+
+        <div id="login" class="form-container">
+            <h2>Login</h2>
+            <button class="button" onclick="showMain()">Back</button>
+            <form onsubmit="login(event)">
+                <label for="loginEmail">Email:</label>
+                <input type="email" id="loginEmail" required>
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" required>
+                <button type="submit" class="button">Login</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        © 2024 Gym Registration
+    </footer>
+
+    <script>
+        function showForm(formType) {
+            document.querySelectorAll('.form-container').forEach(form => form.style.display = 'none');
+            document.getElementById(formType + '-registration').style.display = 'flex';
+            document.getElementById('button-container').style.display = 'none';
+        }
+
+        function showMain() {
+            document.querySelectorAll('.form-container').forEach(form => form.style.display = 'none');
+            document.getElementById('button-container').style.display = 'flex';
+        }
+
+        function submitForm(event, type) {
+            event.preventDefault();
+            alert(`${type} registration submitted!`);
+            showMain();
+        }
+
+        function login(event) {
+            event.preventDefault();
+            alert('Login submitted!');
+            showMain();
+        }
+    </script>
+</body>
+</html>

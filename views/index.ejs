@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/partials.css">
+    <title>PureCare Gym</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: url('/images/bgimg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        main {
+            flex-grow: 1;
+            margin-top: 0;
+        }
+
+        main div {
+            color: whitesmoke;
+            height: 800px;
+            font-size: 22px;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        section {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        section a {
+            background-color: #C0EBA6;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+
+        section a:hover {
+            background-color: #fff;
+            color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div>
+            <img src="/images/maindiv.png" alt="Gym Environment" height="400">
+        </div>
+    </main>
+    <section>
+        <a href="/about" class="btn">Know More</a>
+        <a href="/chat" class="btn">Chat with Our Bot</a>
+        <a href="/reviews" class="btn">Reviews</a>
+    </section>
+</body>
+</html>

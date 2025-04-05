@@ -3,220 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <title>PureCare Gym - Chat Assistant</title>
+    <title>Chat - PureCare Fitness</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            background-image: url(/images/bgimg.jpg);
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            flex-direction: column;
-            min-height: 100vh;
-            color: #333;
-        }
-
-       
         .chat-container {
-            width: 100%;
             max-width: 800px;
-            margin: 100px auto 20px;
+            margin: 50px auto;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            height: calc(100vh - 140px);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        .chat-box {
-            flex-grow: 1;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 15px;
-            padding: 20px;
+        .chat-header {
+            text-align: center;
             margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #bce3d7;
+        }
+
+        .chat-header h1 {
+            color: #333;
+            margin: 0;
+        }
+
+        .chat-messages {
+            height: 400px;
             overflow-y: auto;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
 
         .message {
             margin-bottom: 15px;
             padding: 10px 15px;
             border-radius: 15px;
-            max-width: 80%;
+            max-width: 70%;
             word-wrap: break-word;
         }
 
-        .user-message {
-            background: rgba(0, 123, 255, 0.9);
-            color: white;
+        .message.sent {
+            background: #bce3d7;
             margin-left: auto;
             border-bottom-right-radius: 5px;
         }
 
-        .bot-message {
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
+        .message.received {
+            background: #f0f0f0;
             margin-right: auto;
             border-bottom-left-radius: 5px;
         }
 
-        .input-container {
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .message-content {
+            color: #333;
+        }
+
+        .chat-input {
             display: flex;
             gap: 10px;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 15px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        #user-input {
-            flex-grow: 1;
-            padding: 12px;
-            border: 2px solid rgba(221, 221, 221, 0.8);
-            border-radius: 8px;
+        .chat-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
             font-size: 16px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            outline: none;
+            transition: border-color 0.3s ease;
         }
 
-        #send-button {
-            padding: 12px 25px;
-            background: rgba(0, 123, 255, 0.9);
-            color: white;
+        .chat-input input:focus {
+            border-color: #bce3d7;
+        }
+
+        .chat-input button {
+            padding: 10px 20px;
+            background: #bce3d7;
+            color: #000;
             border: none;
-            border-radius: 8px;
+            border-radius: 20px;
             cursor: pointer;
+            font-size: 16px;
             transition: all 0.3s ease;
         }
 
-        #send-button:hover {
-            background: rgba(0, 86, 179, 1);
+        .chat-input button:hover {
+            background: #9fd1c2;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .typing-indicator {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
             display: none;
-            margin: 10px 0;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            width: fit-content;
         }
 
-        .typing-indicator span {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #007bff;
-            border-radius: 50%;
-            margin: 0 2px;
-            animation: typing 1s infinite;
-        }
-
-        .typing-indicator span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-indicator span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes typing {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        footer {
+        .no-messages {
             text-align: center;
+            color: #666;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            width: 100%;
         }
     </style>
 </head>
 <body>
     <div class="chat-container">
-        <div class="chat-box" id="chat-box">
-            <div class="message bot-message">
-                Hello! I'm your PureCare Gym assistant. How can I help you today? I can answer questions about:
-                <ul>
-                    <li>Gym memberships and pricing</li>
-                    <li>Training programs and classes</li>
-                    <li>Equipment and facilities</li>
-                    <li>Personal training services</li>
-                    <li>Nutrition and diet advice</li>
-                    <li>And much more!</li>
-                </ul>
-            </div>
+        <div class="chat-header">
+            <h1>Chat</h1>
         </div>
-        <div class="typing-indicator" id="typing-indicator">
-            <span></span>
-            <span></span>
-            <span></span>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="no-messages">No messages yet. Start the conversation!</div>
         </div>
-        <div class="input-container">
-            <input type="text" id="user-input" placeholder="Type your message here..." autocomplete="off">
-            <button id="send-button">Send</button>
+
+        <div class="typing-indicator" id="typingIndicator"></div>
+
+        <div class="chat-input">
+            <input type="text" id="messageInput" placeholder="Type your message..." autocomplete="off">
+            <button id="sendButton">
+                <i class="fas fa-paper-plane"></i>
+            </button>
         </div>
     </div>
 
-
+    <script src="/socket.io/socket.io.js"></script>
     <script>
-        const chatBox = document.getElementById('chat-box');
-        const userInput = document.getElementById('user-input');
-        const sendButton = document.getElementById('send-button');
-        const typingIndicator = document.getElementById('typing-indicator');
+        const socket = io();
+        const chatMessages = document.getElementById('chatMessages');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+        const typingIndicator = document.getElementById('typingIndicator');
+        let typingTimeout;
 
-        function addMessage(message, isUser) {
+        // Function to add a message to the chat
+        function addMessage(message, isSent = false) {
             const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
-            messageDiv.textContent = message;
-            chatBox.appendChild(messageDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
+            messageDiv.className = `message ${isSent ? 'sent' : 'received'}`;
+            
+            const messageHeader = document.createElement('div');
+            messageHeader.className = 'message-header';
+            messageHeader.innerHTML = `
+                <span>${message.user.name}</span>
+                <span>${new Date(message.timestamp).toLocaleTimeString()}</span>
+            `;
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            messageContent.textContent = message.content;
+            
+            messageDiv.appendChild(messageHeader);
+            messageDiv.appendChild(messageContent);
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Hide "no messages" indicator if it exists
+            const noMessages = document.querySelector('.no-messages');
+            if (noMessages) {
+                noMessages.style.display = 'none';
+            }
         }
 
-        async function sendMessage() {
-            const message = userInput.value.trim();
-            if (!message) return;
-
-            addMessage(message, true);
-            userInput.value = '';
-            typingIndicator.style.display = 'block';
-
-            try {
-                const response = await fetch('/api/chat', {
+        // Handle sending messages
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message) {
+                fetch('/chat/message', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ message }),
-                });
-
-                const data = await response.json();
-                typingIndicator.style.display = 'none';
-                addMessage(data.response, false);
-            } catch (error) {
-                typingIndicator.style.display = 'none';
-                addMessage('Sorry, I encountered an error. Please try again.', false);
-                console.error('Error:', error);
+                    body: JSON.stringify({ message })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        messageInput.value = '';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
             }
         }
 
+        // Event listeners
         sendButton.addEventListener('click', sendMessage);
-        userInput.addEventListener('keypress', (e) => {
+        messageInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 sendMessage();
             }
         });
+
+        // Typing indicator
+        messageInput.addEventListener('input', () => {
+            socket.emit('typing', { user: '<%= user.name %>' });
+            
+            clearTimeout(typingTimeout);
+            typingTimeout = setTimeout(() => {
+                socket.emit('stop typing');
+            }, 1000);
+        });
+
+        // Socket event listeners
+        socket.on('chat message', (message) => {
+            addMessage(message, message.user.id === '<%= user.id %>');
+        });
+
+        socket.on('typing', (data) => {
+            typingIndicator.textContent = `${data.user} is typing...`;
+            typingIndicator.style.display = 'block';
+        });
+
+        socket.on('stop typing', () => {
+            typingIndicator.style.display = 'none';
+        });
+
+        // Focus input on load
+        messageInput.focus();
     </script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 {
   "name": "pure-care-fitness",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,12 +12,18 @@
   "description": "",
   "dependencies": {
     "@google/generative-ai": "^0.24.0",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "els": "^0.1.0-alpha",
     "express": "^5.1.0",
     "express-ejs-layouts": "^2.5.1",
-    "nodemon": "^3.1.9"
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.2",
+    "nodemon": "^3.1.9",
+    "socket.io": "^4.8.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",

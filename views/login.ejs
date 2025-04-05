@@ -13,17 +13,15 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        html, body {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
         body {
+            min-height: 100vh;
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/bgimg.jpg');
             background-size: cover;
             background-position: center;
-            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            padding: 80px 20px 20px;
+            margin: 0;
         }
 
         .login-container {
@@ -33,7 +31,7 @@
             border-radius: 20px;
             padding: 40px;
             width: 100%;
-            max-width: 450px;
+            max-width: 400px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.1);
             margin: auto;
@@ -103,6 +101,7 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 20px;
         }
 
         .btn:hover {
@@ -115,9 +114,48 @@
             transform: translateY(0);
         }
 
-        .links {
-            margin-top: 20px;
+        .social-login {
             text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-login p {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: #bce3d7;
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 20px;
         }
 
         .links a {
@@ -134,50 +172,20 @@
             transform: translateY(-2px);
         }
 
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 20px 0;
-            color: rgba(255, 255, 255, 0.5);
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 20px;
         }
 
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .divider span {
-            padding: 0 10px;
-        }
-
-        .social-login {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .social-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.2rem;
+        .forgot-password a {
+            color: #bce3d7;
+            text-decoration: none;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
-        .social-btn:hover {
-            background: #bce3d7;
-            color: #000;
-            transform: translateY(-3px);
+        .forgot-password a:hover {
+            color: #fff;
         }
 
         @media (max-width: 480px) {
@@ -195,10 +203,10 @@
     <div class="login-container">
         <div class="logo">
             <h1>PureCare Gym</h1>
-            <p>Transform Your Body, Transform Your Life</p>
+            <p>Welcome Back!</p>
         </div>
 
-        <form action="/login" method="POST">
+        <form action="/login" method="POST" id="loginForm">
             <div class="form-group">
                 <i class="fas fa-envelope"></i>
                 <input type="email" class="form-control" placeholder="Email" name="email" required>
@@ -209,97 +217,33 @@
                 <input type="password" class="form-control" placeholder="Password" name="password" required>
             </div>
 
+            <div class="forgot-password">
+                <a href="/forgot-password">Forgot Password?</a>
+            </div>
+
             <button type="submit" class="btn">
                 <i class="fas fa-sign-in-alt"></i> Login
             </button>
+
+            <div class="social-login">
+                <p>Or login with</p>
+                <div class="social-buttons">
+                    <a href="/auth/google" class="social-btn">
+                        <i class="fab fa-google"></i>
+                    </a>
+                    <a href="/auth/facebook" class="social-btn">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="/auth/apple" class="social-btn">
+                        <i class="fab fa-apple"></i>
+                    </a>
+                </div>
+            </div>
         </form>
 
         <div class="links">
-            <a href="/forgot-password">Forgot Password?</a>
-            <a href="/register">Create Account</a>
-        </div>
-
-        <div class="divider">
-            <span>or continue with</span>
-        </div>
-
-        <div class="social-login">
-            <button class="social-btn" onclick="handleGoogleLogin()">
-                <i class="fab fa-google"></i>
-            </button>
-            <button class="social-btn" onclick="handleFacebookLogin()">
-                <i class="fab fa-facebook-f"></i>
-            </button>
-            <button class="social-btn" onclick="handleAppleLogin()">
-                <i class="fab fa-apple"></i>
-            </button>
+            <a href="/register">Don't have an account? Register</a>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form');
-            const socialBtns = document.querySelectorAll('.social-btn');
-
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const submitBtn = this.querySelector('button');
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
-                
-                setTimeout(() => {
-                    console.log('Login attempt');
-                }, 1500);
-            });
-
-            socialBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    this.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 200);
-                });
-            });
-        });
-
-        function handleGoogleLogin() {
-            // Google OAuth implementation
-            const googleAuthUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
-            const params = {
-                client_id: 'YOUR_GOOGLE_CLIENT_ID',
-                redirect_uri: 'http://localhost:3001/auth/google/callback',
-                response_type: 'code',
-                scope: 'email profile',
-                state: 'random_state_string'
-            };
-            const url = `${googleAuthUrl}?${new URLSearchParams(params)}`;
-            window.location.href = url;
-        }
-
-        function handleFacebookLogin() {
-            // Facebook OAuth implementation
-            const facebookAuthUrl = 'https://www.facebook.com/v12.0/dialog/oauth';
-            const params = {
-                client_id: 'YOUR_FACEBOOK_APP_ID',
-                redirect_uri: 'http://localhost:3001/auth/facebook/callback',
-                scope: 'email,public_profile',
-                state: 'random_state_string'
-            };
-            const url = `${facebookAuthUrl}?${new URLSearchParams(params)}`;
-            window.location.href = url;
-        }
-
-        function handleAppleLogin() {
-            // Apple OAuth implementation
-            const appleAuthUrl = 'https://appleid.apple.com/auth/authorize';
-            const params = {
-                client_id: 'YOUR_APPLE_SERVICE_ID',
-                redirect_uri: 'http://localhost:3001/auth/apple/callback',
-                response_type: 'code',
-                scope: 'email name',
-                state: 'random_state_string'
-            };
-            const url = `${appleAuthUrl}?${new URLSearchParams(params)}`;
-            window.location.href = url;
-        }
-    </script>
 </body>
-</html> 
+</html>

@@ -301,6 +301,13 @@
         </div>
 
         <form action="/register" method="POST" id="registrationForm">
+            <div class="user-type">
+                <button type="button" class="user-type-btn active" data-type="user">Regular User</button>
+                <button type="button" class="user-type-btn" data-type="trainer">Trainer</button>
+            </div>
+            
+            <input type="hidden" name="userType" value="user" id="userTypeInput">
+            
             <div class="form-group">
                 <i class="fas fa-user"></i>
                 <input type="text" class="form-control" placeholder="Full Name" name="name" required>
@@ -313,75 +320,47 @@
 
             <div class="form-group">
                 <i class="fas fa-lock"></i>
-                <input type="password" class="form-control" placeholder="Password" name="password" required>
-            </div>
-
-            <div class="form-group">
-                <i class="fas fa-lock"></i>
-                <input type="password" class="form-control" placeholder="Confirm Password" name="confirmPassword" required>
+                <input type="password" class="form-control" placeholder="Password" name="password" required minlength="8">
             </div>
 
             <div class="form-group">
                 <i class="fas fa-phone"></i>
-                <input type="tel" class="form-control" placeholder="Phone Number" name="phone" required>
+                <input type="tel" class="form-control" placeholder="Phone Number" name="phone" required pattern="[0-9]{10}">
             </div>
 
-            <button type="button" class="apply-trainer-btn" id="applyTrainerBtn">
-                <i class="fas fa-dumbbell"></i> Apply as Trainer
-            </button>
+            <div class="form-group">
+                <i class="fas fa-map-marker-alt"></i>
+                <select class="form-control" name="location" required>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Warangal">Warangal</option>
+                    <option value="Khammam">Khammam</option>
+                    <option value="Karimnagar">Karimnagar</option>
+                    <option value="Nizamabad">Nizamabad</option>
+                </select>
+            </div>
 
-            <div class="trainer-application" id="trainerApplication">
-                <h3>Trainer Application</h3>
-                
+            <div id="trainerFields" style="display: none;">
                 <div class="form-group">
                     <i class="fas fa-certificate"></i>
-                    <input type="text" class="form-control" placeholder="Certifications (comma separated)" name="certifications" required>
+                    <input type="text" class="form-control" placeholder="Certifications" name="certification">
                 </div>
 
                 <div class="form-group">
                     <i class="fas fa-briefcase"></i>
-                    <input type="number" class="form-control" placeholder="Years of Experience" name="experience" required>
+                    <input type="number" class="form-control" placeholder="Years of Experience" name="experience">
                 </div>
 
                 <div class="form-group">
-                    <i class="fas fa-tags"></i>
-                    <input type="text" class="form-control" placeholder="Specialization" name="specialization" required>
-                </div>
-
-                <div class="textarea-group">
-                    <textarea class="form-control" placeholder="Professional Summary" name="summary" required></textarea>
-                </div>
-
-                <div class="textarea-group">
-                    <textarea class="form-control" placeholder="Previous Work Experience" name="workExperience" required></textarea>
-                </div>
-
-                <div class="file-upload">
-                    <label class="file-upload-label">
-                        <i class="fas fa-file-upload"></i>
-                        <span>Upload Resume (PDF)</span>
-                        <input type="file" name="resume" accept=".pdf" required>
-                        <span class="file-name"></span>
-                    </label>
-                </div>
-
-                <div class="form-group">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <input type="text" class="form-control" placeholder="Current Address" name="address" required>
-                </div>
-
-                <div class="form-group">
-                    <i class="fas fa-calendar"></i>
-                    <input type="date" class="form-control" placeholder="Date of Birth" name="dob" required>
-                </div>
-
-                <div class="form-group">
-                    <i class="fas fa-venus-mars"></i>
-                    <select class="form-control" name="gender" required>
-                        <option value="">Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
+                    <i class="fas fa-dumbbell"></i>
+                    <select class="form-control" name="specialization">
+                        <option value="">Select Specialization</option>
+                        <option value="weightTraining">Weight Training</option>
+                        <option value="yoga">Yoga</option>
+                        <option value="cardio">Cardio</option>
+                        <option value="crossfit">Crossfit</option>
+                        <option value="martialArts">Martial Arts</option>
+                        <option value="zumba">Zumba</option>
+                        <option value="nutrition">Nutrition</option>
                     </select>
                 </div>
             </div>
@@ -395,67 +374,5 @@
             <a href="/login">Already have an account? Login</a>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const trainerApplication = document.getElementById('trainerApplication');
-            const form = document.getElementById('registrationForm');
-            const fileInput = document.querySelector('input[type="file"]');
-            const fileName = document.querySelector('.file-name');
-            const applyTrainerBtn = document.getElementById('applyTrainerBtn');
-            const traineeForm = document.querySelectorAll('.form-group:not(.trainer-application .form-group)');
-            const submitBtn = document.querySelector('button[type="submit"]');
-
-            applyTrainerBtn.addEventListener('click', function() {
-                const isShowingTrainer = trainerApplication.classList.toggle('show');
-                
-                // Toggle trainee form visibility
-                traineeForm.forEach(element => {
-                    element.style.display = isShowingTrainer ? 'none' : 'block';
-                });
-                
-                // Toggle submit button visibility
-                submitBtn.style.display = isShowingTrainer ? 'none' : 'block';
-                
-                // Update button text
-                this.innerHTML = isShowingTrainer ? 
-                    '<i class="fas fa-times"></i> Cancel Application' : 
-                    '<i class="fas fa-dumbbell"></i> Apply as Trainer';
-            });
-
-            fileInput.addEventListener('change', function() {
-                if (this.files.length > 0) {
-                    fileName.textContent = this.files[0].name;
-                } else {
-                    fileName.textContent = '';
-                }
-            });
-
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const submitBtn = this.querySelector('button[type="submit"]');
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registering...';
-                
-                const formData = new FormData(this);
-                const data = Object.fromEntries(formData.entries());
-                
-                if (data.password !== data.confirmPassword) {
-                    alert('Passwords do not match!');
-                    submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Register';
-                    return;
-                }
-
-                // Add user type to form data
-                formData.append('userType', trainerApplication.classList.contains('show') ? 'trainer' : 'trainee');
-
-                // Simulate registration process
-                setTimeout(() => {
-                    console.log('Registration attempt:', data);
-                    window.location.href = '/';
-                }, 1500);
-            });
-        });
-    </script>
 </body>
 </html>

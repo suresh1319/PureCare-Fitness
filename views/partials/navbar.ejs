@@ -10,15 +10,19 @@
         <nav id="nav-menu">
             <ul>
                 <li class="location-selector">
-                    <i class="fas fa-location-dot"></i>
+                    <i class="fas fa-location-dot" style="color: white;"></i>
                     <span id="location" style="color: white;">Loading location...</span>
                 </li>
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/services">Services</a></li>
                 <li><a href="/trainers">Trainers</a></li>
-                <li><a href="/contact"  >Contact Us</a></li>
-                <% if (currentPath === '/') { %>
+                <li><a href="/contact">Contact Us</a></li>
+                <% if (typeof user !== 'undefined' && user) { %>
+                    <li class="user-info">
+                        <a href="/profile" class="btn">Profile</a>
+                    </li>
+                <% } else { %>
                     <li><a href="/register" class="btn">Register</a></li>
                     <li><a href="/login" class="btn">Login</a></li>
                 <% } %>
@@ -36,7 +40,7 @@
         padding: 1rem 0;
         background: transparent;
         box-shadow: none;
-        height: auto;
+        height: 120px;
         display: flex;
         align-items: center;
     }
@@ -57,7 +61,7 @@
     }
 
     .logo {
-        height: 60px;
+        height: 150px;
         width: auto;
         transition: transform 0.3s ease;
     }
@@ -116,6 +120,16 @@
     .btn:hover {
         background: #9fd1c2;
         color: #000;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .user-info span {
+        font-weight: 500;
     }
 
     @media (max-width: 1024px) {

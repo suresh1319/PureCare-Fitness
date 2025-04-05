@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/css/partials.css">
     <title>PureCare Gym</title>
     <style>
         body {
@@ -16,15 +15,101 @@
             display: flex;
             flex-direction: column;
             background-image: url('/images/bgimg.jpg');
-            background-size: cover;
             background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
+            background-size: cover;
         }
 
         main {
             flex-grow: 1;
-            margin-top: 0;
+        }
+
+        header {
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .logo {
+            height: 250px;
+            width: auto;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+
+        .location-icon {
+            color: white;
+            margin-right: 20px;
+            font-size: 24px;
+        }
+
+        .location {
+            background-color: black;
+        }
+
+        select {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: inherit;
+            padding: 5px;
+        }
+
+        select option {
+            color: black;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            position: absolute;
+            right: 20px;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            font-weight: 200;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            font-size: 18px;
+            font-weight: 200px;
+            color: red;
+        }
+
+        nav ul li .btn {
+            background-color: #C0EBA6;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        nav ul li .btn:hover {
+            background-color: #fff;
+            color: #333;
+            font-size: 18px;
         }
 
         main div {
@@ -35,11 +120,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-bottom: 0;
         }
 
         section {
             text-align: center;
-            padding: 2rem;
+            padding: 20px 0;
+            margin: 0;
+            background-color: transparent;
         }
 
         section a {
@@ -50,18 +138,78 @@
             font-weight: bold;
             text-decoration: none;
             margin: 0 10px;
-            transition: all 0.3s;
         }
 
         section a:hover {
             background-color: #fff;
             color: #333;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 18px;
+        }
+
+        footer {
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                background-color: #333;
+                position: absolute;
+                top: 60px;
+                right: 10px;
+                width: fit-content;
+                padding: 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+                text-align: left;
+                padding-left: 20px;
+            }
+
+            nav ul li a, nav ul li .btn {
+                width: auto;
+                padding: 10px;
+                display: block;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1rem 0.5rem;
+            }
+
+            nav ul li {
+                margin-left: 0;
+                padding-left: 15px;
+            }
+
+            nav ul li a, nav ul li .btn {
+                font-size: 16px;
+                padding: 8px 10px;
+            }
         }
     </style>
 </head>
 <body>
+   
     <main>
         <div>
             <img src="/images/maindiv.png" alt="Gym Environment" height="400">
@@ -72,5 +220,20 @@
         <a href="/chat" class="btn">Chat with Our Bot</a>
         <a href="/reviews" class="btn">Reviews</a>
     </section>
+    <footer>
+        <p>&copy; 2024 purecarepath</p>
+    </footer>
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+
+            hamburger.addEventListener('click', function () {
+                navMenu.querySelector('ul').classList.toggle('active');
+            });
+        });
+    </script>
 </body>
 </html>

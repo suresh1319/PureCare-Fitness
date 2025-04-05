@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title || 'PureCare Gym' %></title>
+    <title>
+        <%= title || 'PureCare Gym' %>
+    </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
         * {
@@ -13,7 +16,8 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        html, body {
+        html,
+        body {
             min-height: 100vh;
             width: 100%;
             max-width: 100%;
@@ -25,46 +29,50 @@
             max-width: 100%;
             display: flex;
             flex-direction: column;
+
         }
 
         .main-content {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            min-height: calc(100vh - 400px);
+            width: 100vw;
+            margin: 0;
+            padding: 0px;
             flex: 1;
+            /* background-image: url('/images/servicebg.webp');
+            background-position: center;
+            background-size: cover; */
+
         }
 
         /* Add styles for pages without navbar */
-        body.no-navbar .main-content {
+        /* body.no-navbar .main-content {
             padding-top: 20px;
-        }
+        } */
 
         /* Add padding for fixed navbar */
-        body:not(.no-navbar) .main-content {
+        /* body:not(.no-navbar) .main-content {
             padding-top: 20px;
-        }
+        } */
 
         footer {
             background: rgba(0, 0, 0, 0.8);
             width: 100%;
-            margin-top: auto;
         }
     </style>
-    <%- typeof style !== 'undefined' ? style : '' %>
+    <%- typeof style !=='undefined' ? style : '' %>
 </head>
+
 <body class="<%= typeof noNavbar !== 'undefined' && noNavbar ? 'no-navbar' : '' %>">
-    <% if (typeof noNavbar === 'undefined' || !noNavbar) { %>
+    <% if (typeof noNavbar==='undefined' || !noNavbar) { %>
         <%- include('partials/navbar') %>
-    <% } %>
-    
-    <div class="main-content">
-        <%- typeof body !== 'undefined' ? body : '' %>
-    </div>
+            <% } %>
 
-    <%- include('partials/footer') %>
-
-    <%- typeof script !== 'undefined' ? script : '' %>
+                <div class="main-content">
+                    <%- typeof body !=='undefined' ? body : '' %>
+                </div>
+                <% if (typeof noFooter==='undefined' || !noNavbar) { %>
+                    <%- include('partials/footer') %>
+                        <% } %>
+                            <%- typeof script !=='undefined' ? script : '' %>
 </body>
-</html> 
+
+</html>

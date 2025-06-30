@@ -1,4 +1,4 @@
-![Pure Care Fitness](public/images/bgimg.jpg)
+![Pure Care Fitness](public\images\purecarefitness-cPgDB8df.png)
 
 # Pure Care Fitness
 

@@ -1,3 +1,5 @@
+![Pure Care Fitness](public/images/bgimg.jpg)
+
 # Pure Care Fitness
 
 A comprehensive fitness management web application built with Node.js, Express, and MongoDB.
@@ -67,4 +69,4 @@ This project is currently under development. Features are being added and improv
 
 ## License
 
-This project is licensed under the MIT License. 
+This project is licensed under the MIT License.

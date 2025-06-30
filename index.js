@@ -120,12 +120,11 @@ app.get('/register', (req, res) => {
         noFooter: true
     });
 });
-app.post('/login', loginUser);
 
+app.post('/login', loginUser);
 app.post('/register', registerUser);
 app.get('/logout',logoutUser);
 
-// Profile route
 app.get('/profile', isLoggedIn, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
@@ -142,7 +141,6 @@ app.get('/profile', isLoggedIn, async (req, res) => {
     }
 });
 
-// Edit Profile Routes
 app.get('/profile/edit', isLoggedIn, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
@@ -161,13 +159,11 @@ app.post('/profile/edit', isLoggedIn, async (req, res) => {
         const { name, email, phone } = req.body;
         const errors = {};
 
-        // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             errors.email = 'Please enter a valid email address';
         }
 
-        // Validate phone number format (basic validation)
         const phoneRegex = /^[0-9]{10}$/;
         if (!phoneRegex.test(phone)) {
             errors.phone = 'Please enter a valid 10-digit phone number';
@@ -200,10 +196,8 @@ app.post('/profile/edit', isLoggedIn, async (req, res) => {
     }
 });
 
-// Create HTTP server
 const server = http.createServer(app);
 
-// Initialize Socket.IO
 const io = new Server(server, {
     cors: {
         origin: "*",
@@ -232,7 +226,7 @@ app.get('/chat', isLoggedIn, (req, res) => {
     res.render('chat', { 
         title: 'Chat',
         user: req.user,
-        messages: [] // Initialize with empty messages
+        messages: [] 
     });
 });
 
@@ -265,7 +259,6 @@ app.post('/chat/message', isLoggedIn, async (req, res) => {
     }
 });
 
-// Start server
 server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
